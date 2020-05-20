@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,28 +34,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-     _counter++;
+      _counter++;
     });
+  }
+
+  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    return ListTile(
+        title: Row(children: [
+          Expanded(
+            child: Text(document['num'].toString()),
+          ),
+        ]),
+        onTap: () {
+          document.reference.updateData({'num': document['num'] + 1});
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(
-      ),
-      body: Center(
-        child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: StreamBuilder(
+        stream: Firestore.instance.collection("kicker-locations").snapshots(),
+        builder: (context, snapshot) {
+          print(snapshot.hasData);
+          if (!snapshot.hasData) {
+            return const Text("Loading...");
+          } else {
+            return ListView.builder(
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) =>
+                    _buildListItem(context, snapshot.data.documents[index]));
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

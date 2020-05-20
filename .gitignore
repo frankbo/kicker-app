@@ -44,3 +44,7 @@ app.*.map.json
 
 # Ignore files for google-services
 android/app/src/google-services.json
+
+# Ignore grades build files and folders
+.gradle
+local.properties
