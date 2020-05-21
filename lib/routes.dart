@@ -1,4 +1,4 @@
 class Routes {
-  String listViewRoute = "/list-search";
-  String mapViewRoute = "/";
+  final String listViewRoute = "/list-search";
+  final String mapViewRoute = "/";
 }

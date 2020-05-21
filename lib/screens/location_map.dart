@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kicker_app/widgets/loading_spinner.dart';
 
 import '../routes.dart';
 
@@ -17,7 +18,7 @@ class LocationMap extends StatelessWidget {
   }
 
   void _toListView(BuildContext context) {
-    var routes = new Routes();
+    final routes = new Routes();
     Navigator.pushReplacementNamed(context,
         routes.listViewRoute); //TODO create singelton with Routes definintion
   }
@@ -38,11 +39,7 @@ class LocationMap extends StatelessWidget {
         stream: Firestore.instance.collection("kicker-locations").snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-              ),
-            );
+            return LoadingSpinner();
           } else {
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
