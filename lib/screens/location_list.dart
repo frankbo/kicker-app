@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kicker_app/widgets/locations.dart';
 
 import '../routes.dart';
 
@@ -11,17 +12,16 @@ class LocationList extends StatelessWidget {
           // action button
           IconButton(
             icon: Icon(Icons.map),
-            onPressed: () {
-              _toMapView(context);
-            },
+            onPressed: _toMapView(context),
           ),
         ]),
-        body: Text("Here comes the list view"));
+        body: Locations());
   }
 
-  void _toMapView(BuildContext context) {
-    var routes = new Routes();
-    Navigator.pushReplacementNamed(context,
-        routes.mapViewRoute); //TODO create singelton with Routes definintion
-  }
+  Future<Object> Function() _toMapView(BuildContext context) =>
+      () => Navigator.pushReplacementNamed(
+          context,
+          new Routes()
+              .mapViewRoute); //TODO create singelton with Routes definintion
+
 }

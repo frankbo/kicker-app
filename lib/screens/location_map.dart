@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kicker_app/widgets/loading_spinner.dart';
 
 import '../routes.dart';
 
@@ -17,37 +16,24 @@ class LocationMap extends StatelessWidget {
         });
   }
 
-  void _toListView(BuildContext context) {
-    final routes = new Routes();
-    Navigator.pushReplacementNamed(context,
-        routes.listViewRoute); //TODO create singelton with Routes definintion
+  _toListView(BuildContext context) {
+    return () => Navigator.pushReplacementNamed(
+        context,
+        new Routes()
+            .listViewRoute); //TODO create singelton with Routes definintion
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("KickerApp")), actions: <Widget>[
-        // action button
-        IconButton(
-          icon: Icon(Icons.list),
-          onPressed: () {
-            _toListView(context);
-          },
-        ),
-      ]),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection("kicker-locations").snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return LoadingSpinner();
-          } else {
-            return ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) =>
-                    _buildListItem(context, snapshot.data.documents[index]));
-          }
-        },
-      ),
-    );
+        appBar:
+            AppBar(title: Center(child: Text("KickerApp")), actions: <Widget>[
+          // action button
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: _toListView(context),
+          ),
+        ]),
+        body: Text("here comes the map"));
   }
 }
