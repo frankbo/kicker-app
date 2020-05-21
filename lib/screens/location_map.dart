@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../routes.dart';
 
-class Map extends StatelessWidget {
+class LocationMap extends StatelessWidget {
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return ListTile(
         title: Row(children: [

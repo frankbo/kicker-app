@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kicker_app/screens/map.dart';
+import 'package:kicker_app/screens/location_map.dart';
 
 void main() {
   var materialApp = MaterialApp(
     home: Scaffold(
-      body: Map(),
+      body: LocationMap(),
     ),
   );
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kicker_app/routes.dart';
-import 'package:kicker_app/screens/Map.dart';
+import 'package:kicker_app/screens/location_list.dart';
+import 'package:kicker_app/screens/location_map.dart';
 
 void main() => runApp(App());
 
@@ -10,8 +11,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     var routes = new Routes();
     return MaterialApp(title: 'Flutter Demo', initialRoute: '/', routes: {
-      '/': (context) => Map(),
-      routes.listViewRoute: (context) => Map(),
+      routes.mapViewRoute: (context) => LocationMap(),
+      routes.listViewRoute: (context) => LocationList(),
     });
   }
 }
