@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../routes.dart';
 
-class Map extends StatefulWidget {
-  @override
-  State<Map> createState() => MapState();
-}
-
-class MapState extends State<Map> {
+class Map extends StatelessWidget {
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return ListTile(
         title: Row(children: [
@@ -21,7 +16,7 @@ class MapState extends State<Map> {
         });
   }
 
-  void _toListView() {
+  void _toListView(BuildContext context) {
     var routes = new Routes();
     Navigator.pushReplacementNamed(context,
         routes.listViewRoute); //TODO create singelton with Routes definintion
@@ -34,7 +29,9 @@ class MapState extends State<Map> {
         // action button
         IconButton(
           icon: Icon(Icons.list),
-          onPressed: _toListView,
+          onPressed: () {
+            _toListView(context);
+          },
         ),
       ]),
       body: StreamBuilder(
