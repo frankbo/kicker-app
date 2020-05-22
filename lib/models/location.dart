@@ -1,22 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class LastVisit {
-  String month;
-  String year;
+  final String month;
+  final String year;
 
   LastVisit.fromMap(Map<dynamic, dynamic> data)
       : month = data["month"],
         year = data["year"];
 }
 
+@immutable
 class Location {
-  String documentID;
-  String city;
-  LastVisit lastVisit;
-  String name;
-  String plz;
-  String street;
-  GeoPoint loc;
+  final String documentID;
+  final String city;
+  final LastVisit lastVisit;
+  final String name;
+  final String plz;
+  final String street;
+  final GeoPoint loc;
 
   Location.fromSnapshot(DocumentSnapshot snapshot)
       : documentID = snapshot.documentID,
