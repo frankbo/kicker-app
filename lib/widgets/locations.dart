@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kicker_app/models/location.dart';
-
+import '../routes.dart';
 import 'loading_spinner.dart';
 
 class Locations extends StatelessWidget {
-  _buildListItem(BuildContext context, Location location) {
+  static _navigateToDetails(BuildContext context) =>
+      () => Navigator.pushNamed(context, new Routes().locationDetails);
+
+  static _buildListItem(BuildContext context, Location location) {
     final test = location.city +
         " " +
         location.lastVisit?.year +
@@ -23,6 +26,7 @@ class Locations extends StatelessWidget {
           child: Text(test),
         ),
       ]),
+      onTap: _navigateToDetails(context),
     );
   }
 
