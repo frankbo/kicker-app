@@ -4,32 +4,32 @@ import 'package:kicker_app/models/location.dart';
 import '../routes.dart';
 import 'loading_spinner.dart';
 
+_navigateToDetails(BuildContext context) =>
+        () => Navigator.pushNamed(context, new Routes().locationDetails);
+
+_buildListItem(BuildContext context, Location location) {
+  final test = location.city +
+      " " +
+      location.lastVisit?.year +
+      " " +
+      location.name +
+      " " +
+      location.plz +
+      " " +
+      location.loc.longitude.toString() +
+      " " +
+      location.loc.latitude.toString();
+  return ListTile(
+    title: Row(children: [
+      Expanded(
+        child: Text(test),
+      ),
+    ]),
+    onTap: _navigateToDetails(context),
+  );
+}
+
 class Locations extends StatelessWidget {
-  static _navigateToDetails(BuildContext context) =>
-      () => Navigator.pushNamed(context, new Routes().locationDetails);
-
-  static _buildListItem(BuildContext context, Location location) {
-    final test = location.city +
-        " " +
-        location.lastVisit?.year +
-        " " +
-        location.name +
-        " " +
-        location.plz +
-        " " +
-        location.loc.longitude.toString() +
-        " " +
-        location.loc.latitude.toString();
-    return ListTile(
-      title: Row(children: [
-        Expanded(
-          child: Text(test),
-        ),
-      ]),
-      onTap: _navigateToDetails(context),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
