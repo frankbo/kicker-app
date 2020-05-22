@@ -3,6 +3,10 @@ import 'package:kicker_app/widgets/locations.dart';
 
 import '../routes.dart';
 
+Future<Object> Function() _toMapView(BuildContext context) =>
+    () => Navigator.pushReplacementNamed(context,
+        new Routes().root); //TODO create singelton with Routes definintion
+
 class LocationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,11 +21,4 @@ class LocationList extends StatelessWidget {
         ]),
         body: Locations());
   }
-
-  Future<Object> Function() _toMapView(BuildContext context) =>
-      () => Navigator.pushReplacementNamed(
-          context,
-          new Routes()
-              .mapViewRoute); //TODO create singelton with Routes definintion
-
 }
