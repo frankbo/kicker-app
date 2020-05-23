@@ -42,9 +42,6 @@ app.*.map.json
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-# Ignore files for google-services
-android/app/src/google-services.json
-
 # Ignore grades build files and folders
 .gradle
 local.properties
