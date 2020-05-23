@@ -15,3 +15,18 @@ Stream<Location> getLocationByDocumentId(String collection, String documentId) {
     }
   }).asStream();
 }
+
+Stream<List<Location>> getLocations(String collection) {
+  // TODO is this stream transformation correct?
+  return Firestore.instance
+      .collection(collection)
+      .snapshots()
+      .map((qs) => qs.documents.map((doc) {
+            try {
+              return Location.fromSnapshot(doc);
+            } catch (e) {
+              print(e);
+              return null;
+            }
+          }));
+}
