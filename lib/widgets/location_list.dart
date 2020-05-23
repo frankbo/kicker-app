@@ -24,6 +24,7 @@ ListTile _buildLocationItem(BuildContext context, Location location) {
       location.loc.latitude.toString();
   return ListTile(
     title: Row(children: [
+      Image.asset('assets/images/logo.png', height: 80, width: 80),
       Expanded(
         child: Text(test),
       ),
