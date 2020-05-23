@@ -5,11 +5,12 @@ import 'package:kicker_app/screens/location_details.dart';
 
 import 'loading_spinner.dart';
 
-_navigateToDetails(BuildContext context, Location location) =>
+Future<Object> Function() _navigateToDetails(
+        BuildContext context, Location location) =>
     () => Navigator.pushNamed(context, LocationDetailsPage.route,
         arguments: location);
 
-_buildLocationItem(BuildContext context, Location location) {
+ListTile _buildLocationItem(BuildContext context, Location location) {
   final test = location.city +
       " " +
       location.lastVisit?.year +
