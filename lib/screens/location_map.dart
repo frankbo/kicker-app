@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kicker_app/screens/location_list.dart';
 
 _toListView(BuildContext context) =>
-    () => Navigator.pushReplacementNamed(context, LocationList.route);
+    () => Navigator.pushReplacementNamed(context, LocationListPage.route);
 
-class LocationMap extends StatelessWidget {
+class LocationMapPage extends StatelessWidget {
   static final route = '/';
 
   @override

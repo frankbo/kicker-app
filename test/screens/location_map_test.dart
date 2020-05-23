@@ -5,7 +5,7 @@ import 'package:kicker_app/screens/location_map.dart';
 void main() {
   var materialApp = MaterialApp(
     home: Scaffold(
-      body: LocationMap(),
+      body: LocationMapPage(),
     ),
   );
 

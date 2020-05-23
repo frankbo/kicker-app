@@ -5,10 +5,11 @@ import 'package:kicker_app/screens/location_details.dart';
 
 import 'loading_spinner.dart';
 
-_navigateToDetails(BuildContext context, Location location) => () =>
-    Navigator.pushNamed(context, LocationDetails.route, arguments: location);
+_navigateToDetails(BuildContext context, Location location) =>
+    () => Navigator.pushNamed(context, LocationDetailsPage.route,
+        arguments: location);
 
-_buildListItem(BuildContext context, Location location) {
+_buildLocationItem(BuildContext context, Location location) {
   final test = location.city +
       " " +
       location.lastVisit?.year +
@@ -30,7 +31,7 @@ _buildListItem(BuildContext context, Location location) {
   );
 }
 
-class Locations extends StatelessWidget {
+class LocationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -41,7 +42,7 @@ class Locations extends StatelessWidget {
         } else {
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context,
+              itemBuilder: (context, index) => _buildLocationItem(context,
                   Location.fromSnapshot(snapshot.data.documents[index])));
         }
       },

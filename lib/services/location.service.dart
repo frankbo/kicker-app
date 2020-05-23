@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kicker_app/models/location.dart';
 
-Stream<Location> getLocationByDocumentId(String collection, String documentId) {
-  return Firestore.instance
+Stream<Location> getLocationByDocumentId(String collection, String documentId) =>
+  Firestore.instance
       .collection(collection)
       .document(documentId)
       .get()
@@ -14,7 +14,7 @@ Stream<Location> getLocationByDocumentId(String collection, String documentId) {
       return null;
     }
   }).asStream();
-}
+
 
 Stream<List<Location>> getLocations(String collection) {
   // TODO is this stream transformation correct?

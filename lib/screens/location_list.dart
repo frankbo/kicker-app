@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kicker_app/screens/location_map.dart';
-import 'package:kicker_app/widgets/locations.dart';
+import 'package:kicker_app/widgets/location_list.dart';
 
 Future<Object> Function() _toMapView(BuildContext context) =>
-    () => Navigator.pushReplacementNamed(context, LocationMap.route);
+    () => Navigator.pushReplacementNamed(context, LocationMapPage.route);
 
-class LocationList extends StatelessWidget {
+class LocationListPage extends StatelessWidget {
   static final String route = "/list-search";
 
   @override
@@ -19,6 +19,6 @@ class LocationList extends StatelessWidget {
             onPressed: _toMapView(context),
           ),
         ]),
-        body: Locations());
+        body: LocationList());
   }
 }

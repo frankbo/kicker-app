@@ -5,7 +5,7 @@ import 'package:kicker_app/screens/location_list.dart';
 void main() {
   var materialApp = MaterialApp(
     home: Scaffold(
-      body: LocationList(),
+      body: LocationListPage(),
     ),
   );
 
