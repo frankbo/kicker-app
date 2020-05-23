@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kicker_app/screens/location_map.dart';
 import 'package:kicker_app/widgets/locations.dart';
 
-import '../routes.dart';
-
 Future<Object> Function() _toMapView(BuildContext context) =>
-    () => Navigator.pushReplacementNamed(context,
-        new Routes().root); //TODO create singelton with Routes definintion
+    () => Navigator.pushReplacementNamed(context, LocationMap.route);
 
 class LocationList extends StatelessWidget {
+  static final String route = "/list-search";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

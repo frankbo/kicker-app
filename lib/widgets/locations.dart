@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kicker_app/models/location.dart';
+import 'package:kicker_app/screens/location_details.dart';
 
-import '../routes.dart';
 import 'loading_spinner.dart';
 
-_navigateToDetails(BuildContext context, Location location) =>
-    () => Navigator.pushNamed(context, new Routes().locationDetails,
-        arguments: location);
+_navigateToDetails(BuildContext context, Location location) => () =>
+    Navigator.pushNamed(context, LocationDetails.route, arguments: location);
 
 _buildListItem(BuildContext context, Location location) {
   final test = location.city +

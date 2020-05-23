@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kicker_app/models/location.dart';
 
 class LocationDetails extends StatelessWidget {
+  static final String route = "/location-details";
+
   final Location arguments;
   LocationDetails(this.arguments);
 

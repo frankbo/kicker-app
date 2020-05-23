@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kicker_app/screens/location_list.dart';
 
-import '../routes.dart';
-
-_toListView(BuildContext context) => () => Navigator.pushReplacementNamed(
-    context,
-    new Routes().listViewRoute); //TODO create singelton with Routes definintion
+_toListView(BuildContext context) =>
+    () => Navigator.pushReplacementNamed(context, LocationList.route);
 
 class LocationMap extends StatelessWidget {
+  static final route = '/';
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Center(child: Text("KickerApp")), actions: <Widget>[
