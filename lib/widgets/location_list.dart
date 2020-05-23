@@ -11,22 +11,25 @@ Future<Object> Function() _navigateToDetails(
         arguments: location);
 
 ListTile _buildLocationItem(BuildContext context, Location location) {
-  final test = location.city +
-      " " +
-      location.lastVisit?.year +
-      " " +
-      location.name +
-      " " +
-      location.plz +
-      " " +
-      location.loc.longitude.toString() +
-      " " +
-      location.loc.latitude.toString();
   return ListTile(
-    title: Row(children: [
-      Image.asset('assets/images/logo.png', height: 80, width: 80),
+    dense: true,
+    contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
+    title: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Image.asset('assets/images/logo.png',
+          height: 80, width: 80, fit: BoxFit.contain),
       Expanded(
-        child: Text(test),
+        child: Padding(
+            padding: EdgeInsets.only(left: 5.0, right: 5.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  location.name,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(location.city)
+              ],
+            )),
       ),
     ]),
     onTap: _navigateToDetails(context, location),
