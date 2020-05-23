@@ -14,7 +14,8 @@ class App extends StatelessWidget {
     return MaterialApp(title: 'Flutter Demo', initialRoute: '/', routes: {
       routes.root: (context) => LocationMap(),
       routes.listViewRoute: (context) => LocationList(),
-      routes.locationDetails: (context) => LocationDetails()
+      routes.locationDetails: (context) =>
+          LocationDetails(ModalRoute.of(context).settings.arguments)
     });
   }
 }

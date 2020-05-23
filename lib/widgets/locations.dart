@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kicker_app/models/location.dart';
+
 import '../routes.dart';
 import 'loading_spinner.dart';
 
-_navigateToDetails(BuildContext context) =>
-        () => Navigator.pushNamed(context, new Routes().locationDetails);
+_navigateToDetails(BuildContext context, Location location) =>
+    () => Navigator.pushNamed(context, new Routes().locationDetails,
+        arguments: location);
 
 _buildListItem(BuildContext context, Location location) {
   final test = location.city +
@@ -25,7 +27,7 @@ _buildListItem(BuildContext context, Location location) {
         child: Text(test),
       ),
     ]),
-    onTap: _navigateToDetails(context),
+    onTap: _navigateToDetails(context, location),
   );
 }
 
