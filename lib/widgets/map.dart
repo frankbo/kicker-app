@@ -1,21 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-final CameraPosition _kGooglePlex = CameraPosition(
-  target: LatLng(37.42796133580664, -122.085749655962),
-  zoom: 14.4746,
-);
-
-final CameraPosition _kLake = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414);
-
-Future<void> _goToTheLake(
-    Completer<GoogleMapController> c, CameraPosition location) async {
+Future<void> _jumpToCurrentPosition(Completer<GoogleMapController> c) async {
+  final Position currentLocation = await Geolocator().getCurrentPosition();
+  final CameraPosition location = CameraPosition(
+      target: LatLng(currentLocation.latitude, currentLocation.longitude),
+      zoom: 14);
   final GoogleMapController controller = await c.future;
   controller.animateCamera(CameraUpdate.newCameraPosition(location));
 }
@@ -26,24 +19,37 @@ class MapWidget extends StatefulWidget {
 }
 
 class MapWidgetState extends State<MapWidget> {
+  var currentLocation;
+
   Completer<GoogleMapController> _controller = Completer();
+
+  @override
+  void initState() {
+    super.initState();
+    Geolocator().getCurrentPosition().then((location) {
+      setState(() {
+        currentLocation = location;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
+        initialCameraPosition: CameraPosition(
+            target: LatLng(currentLocation.latitude, currentLocation.longitude),
+            zoom: 14),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.my_location),
         onPressed: () {
-          _goToTheLake(_controller, _kLake);
+          _jumpToCurrentPosition(_controller);
         },
-        label: Text('To the lake!'),
-        icon: Icon(Icons.my_location),
       ),
     );
   }
