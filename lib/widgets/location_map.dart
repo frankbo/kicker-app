@@ -13,16 +13,15 @@ Future<void> _jumpToCurrentPosition(Completer<GoogleMapController> c) async {
   controller.animateCamera(CameraUpdate.newCameraPosition(location));
 }
 
-class MapWidget extends StatefulWidget {
+class LocationMap extends StatefulWidget {
   final Position position;
-
-  const MapWidget({Key key, this.position}) : super(key: key);
+  const LocationMap(this.position);
 
   @override
-  State<MapWidget> createState() => MapWidgetState();
+  LocationMapState createState() => LocationMapState();
 }
 
-class MapWidgetState extends State<MapWidget> {
+class LocationMapState extends State<LocationMap> {
   Completer<GoogleMapController> _controller = Completer();
 
   @override
