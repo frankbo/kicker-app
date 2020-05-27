@@ -10,7 +10,10 @@ class LocationDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Center(child: Text("KickerApp"))),
+        appBar: AppBar(
+          title: Center(child: Text("KickerApp")),
+          centerTitle: true,
+        ),
         body: Text("here comes the detail page"));
   }
 }

@@ -11,14 +11,17 @@ class LocationListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(title: Center(child: Text("KickerApp")), actions: <Widget>[
-          // action button
-          IconButton(
-            icon: Icon(Icons.map),
-            onPressed: _toMapView(context),
-          ),
-        ]),
+        appBar: AppBar(
+          title: Center(child: Text("KickerApp")),
+          actions: <Widget>[
+            // action button
+            IconButton(
+              icon: Icon(Icons.map),
+              onPressed: _toMapView(context),
+            ),
+          ],
+          centerTitle: true,
+        ),
         body: LocationList());
   }
 }

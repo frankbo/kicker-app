@@ -10,12 +10,16 @@ class LocationMapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Center(child: Text("KickerApp")), actions: <Widget>[
-        // action button
-        IconButton(
-          icon: Icon(Icons.list),
-          onPressed: _toListView(context),
-        ),
-      ]),
+      appBar: AppBar(
+        title: Center(child: Text("KickerApp")),
+        actions: <Widget>[
+          // action button
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: _toListView(context),
+          ),
+        ],
+        centerTitle: true,
+      ),
       body: AsyncMap());
 }
