@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:kicker_app/provider/location_provider.dart';
 import 'package:kicker_app/screens/location_details.dart';
 import 'package:kicker_app/screens/location_list.dart';
 import 'package:kicker_app/screens/location_map.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(App());
+void main() {
+  debugPaintSizeEnabled = true;
+  runApp(App());
+}
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
         providers: [
-          FutureProvider(create: (_) => LocationProvider.getCurrentLocation()),
+          FutureProvider(create: (_) => LocationProvider.getCurrentPosition()),
+          StreamProvider(
+            create: (_) => LocationProvider.getLocations("kicker-locations"),
+          )
         ],
         child: MaterialApp(
             title: 'KickerApp',

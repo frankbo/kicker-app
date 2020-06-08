@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kicker_app/models/location.dart';
 import 'package:kicker_app/screens/location_details.dart';
-
-import 'loading_spinner.dart';
 
 Future<Object> Function() _navigateToDetails(
         BuildContext context, Location location) =>
@@ -37,20 +34,14 @@ ListTile _buildLocationItem(BuildContext context, Location location) {
 }
 
 class LocationList extends StatelessWidget {
+  final List<Location> locations;
+  const LocationList(this.locations);
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: Firestore.instance.collection("kicker-locations").snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return LoadingSpinner();
-        } else {
-          return ListView.builder(
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildLocationItem(context,
-                  Location.fromSnapshot(snapshot.data.documents[index])));
-        }
-      },
-    );
+    return ListView.builder(
+        itemCount: locations.length,
+        itemBuilder: (context, index) =>
+            _buildLocationItem(context, locations[index]));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kicker_app/screens/location_map.dart';
-import 'package:kicker_app/widgets/location_list.dart';
+import 'package:kicker_app/widgets/async_location_list.dart';
 
 Future<Object> Function() _toMapView(BuildContext context) =>
     () => Navigator.pushReplacementNamed(context, LocationMapPage.route);
@@ -22,6 +22,6 @@ class LocationListPage extends StatelessWidget {
           ],
           centerTitle: true,
         ),
-        body: LocationList());
+        body: AsyncLocationList());
   }
 }
