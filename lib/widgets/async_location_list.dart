@@ -4,6 +4,21 @@ import 'package:kicker_app/models/location.dart';
 import 'package:kicker_app/widgets/loading_spinner.dart';
 import 'package:kicker_app/widgets/location_list.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
+
+Future<List<Tuple2<double, Location>>> _filterByClosestLocation(
+    Position position, List<Location> locations) {
+  final locationsAndDistances = locations.map((l) => Geolocator()
+      .distanceBetween(position.latitude, position.longitude, l.loc.latitude,
+          l.loc.longitude)
+      .then((d) => Tuple2(d, l)));
+
+  return Future.wait(locationsAndDistances)
+      .then((List<Tuple2<double, Location>> v) {
+    v.sort((a, b) => b.item1.compareTo(a.item1));
+    return v;
+  }).catchError((e) => print(e));
+}
 
 class AsyncLocationList extends StatelessWidget {
   @override
@@ -12,7 +27,11 @@ class AsyncLocationList extends StatelessWidget {
       builder: (context, position, locations, _) {
         return (position == null || locations == null)
             ? LoadingSpinner()
-            : LocationList(locations);
+            : FutureBuilder(
+                future: _filterByClosestLocation(position, locations),
+                builder: (context, snapshot) => snapshot.hasData
+                    ? LocationList(snapshot.data)
+                    : LoadingSpinner());
       },
     );
   }
