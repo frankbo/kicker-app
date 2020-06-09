@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kicker_app/lib/location_calculation.dart';
 import 'package:kicker_app/models/location.dart';
 import 'package:kicker_app/screens/location_details.dart';
 import 'package:tuple/tuple.dart';
@@ -10,7 +11,8 @@ Future<Object> Function() _navigateToDetails(
 
 ListTile _buildLocationItem(
     BuildContext context, Tuple2<double, Location> locationAndDistance) {
-  final distance = locationAndDistance.item1;
+  final distanceInKm =
+      roundDouble(meterToKilometers(locationAndDistance.item1), 2);
   final location = locationAndDistance.item2;
   return ListTile(
     dense: true,
@@ -29,7 +31,7 @@ ListTile _buildLocationItem(
                   style: TextStyle(fontSize: 20),
                 ),
                 Text(location.city),
-                Text(distance.toString())
+                Text(distanceInKm.toString() + " km")
               ],
             )),
       ),

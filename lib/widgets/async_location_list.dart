@@ -15,7 +15,7 @@ Future<List<Tuple2<double, Location>>> _filterByClosestLocation(
 
   return Future.wait(locationsAndDistances)
       .then((List<Tuple2<double, Location>> v) {
-    v.sort((a, b) => b.item1.compareTo(a.item1));
+    v.sort((a, b) => a.item1.compareTo(b.item1));
     return v;
   }).catchError((e) => print(e));
 }
