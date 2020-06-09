@@ -12,7 +12,7 @@ class AsyncMap extends StatelessWidget {
       builder: (context, position, locations, _) {
         return (position == null || locations == null)
             ? LoadingSpinner()
-            : LocationMap(position);
+            : LocationMap(position, locations);
       },
     );
   }
