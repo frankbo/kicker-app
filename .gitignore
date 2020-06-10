@@ -45,3 +45,6 @@ app.*.map.json
 # Ignore grades build files and folders
 .gradle
 local.properties
+
+# Keys
+lib/static/keys.dart
