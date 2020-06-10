@@ -45,7 +45,7 @@ Widget _heroIcon() {
   ]);
 }
 
-Widget _overView(Location location) {
+Widget _overview(Location location) {
   return Container(
       color: KickerColors.main,
       padding: EdgeInsets.all(10),
@@ -64,7 +64,7 @@ class LocationDetail extends StatelessWidget {
     return ListView(
       children: [
         _heroIcon(),
-        _overView(this.location),
+        _overview(this.location),
         Center(
           child: RaisedButton(
             onPressed: () {
