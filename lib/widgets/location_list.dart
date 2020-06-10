@@ -18,8 +18,16 @@ ListTile _buildLocationItem(
     dense: true,
     contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
     title: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Image.asset('assets/images/logo.png',
-          height: 80, width: 80, fit: BoxFit.contain),
+      ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          Colors.grey,
+          BlendMode.saturation,
+        ),
+        child: Opacity(
+            opacity: 0.6,
+            child: Image.asset('assets/images/logo.png',
+                height: 80, width: 80, fit: BoxFit.contain)),
+      ),
       Expanded(
         child: Padding(
             padding: EdgeInsets.only(left: 5.0, right: 5.0),
