@@ -83,7 +83,7 @@ Widget _descriptionArea(Location location) {
 Widget _staticMap(Location location) {
   final mapStyle = "osm-carto";
   final width = "600";
-  final height = "200";
+  final height = "400";
   final apiBaseUrl = "https://maps.geoapify.com";
   return GestureDetector(
     onTap: () {
