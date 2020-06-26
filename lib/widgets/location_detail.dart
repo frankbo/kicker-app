@@ -7,13 +7,21 @@ import 'package:url_launcher/url_launcher.dart';
 
 const googleMapsUrl = 'https://www.google.com/maps/';
 
-_launchURL(Location location) async {
+_launchMapsURL(Location location) async {
   String googleUrl = googleMapsUrl +
       'search/?api=1&query=${location.loc.latitude},${location.loc.longitude}';
   if (await canLaunch(googleUrl)) {
     await launch(googleUrl);
   } else {
     throw 'Could not launch $googleUrl';
+  }
+}
+
+_launchHomepageURL(String homepage) async {
+  if (await canLaunch(homepage)) {
+    await launch(homepage);
+  } else {
+    throw 'Could not launch $homepage';
   }
 }
 
@@ -79,12 +87,88 @@ Widget _staticMap(Location location) {
   final apiBaseUrl = "https://maps.geoapify.com";
   return GestureDetector(
     onTap: () {
-      _launchURL(location);
+      _launchMapsURL(location);
     },
     child: Image.network(
       "$apiBaseUrl/v1/staticmap?style=$mapStyle&width=$width&height=$height&center=lonlat:${location.loc.longitude},${location.loc.latitude}&zoom=14&marker=lonlat:${location.loc.longitude},${location.loc.latitude};color:%23ff0000;size:medium&apiKey=${Keys.geoapifyKey}",
     ),
   );
+}
+
+Widget _phoneArea(String phone) => Container(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Icon(Icons.phone),
+          ),
+          Text(phone),
+        ],
+      ),
+    );
+
+Widget _locationArea(Location location) => GestureDetector(
+      onTap: () {
+        _launchMapsURL(location);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Icon(Icons.directions),
+            ),
+            Text("Bring mich zur Location."),
+          ],
+        ),
+      ),
+    );
+
+Widget _homepageArea(String homepage) => GestureDetector(
+      onTap: () {
+        _launchHomepageURL(homepage);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Icon(Icons.link),
+            ),
+            Text("Schau dir die Webseite an."),
+          ],
+        ),
+      ),
+    );
+
+Widget _getInTouchArea(Location location) {
+  final emptyElement = Container(width: 0, height: 0);
+  final phoneArea =
+      (location.phone != null) ? _phoneArea(location.phone) : emptyElement;
+  final websiteArea = (location.homepage != null)
+      ? _homepageArea(location.homepage)
+      : emptyElement;
+
+  return Column(
+    children: [
+      phoneArea,
+      _locationArea(location),
+      websiteArea,
+    ],
+  );
+}
+
+Widget _updateInfo() {
+  return Center(
+      child: Row(
+    children: [
+      Icon(Icons.edit),
+      Text('Falsche Informationen?'),
+    ],
+  ));
 }
 
 class LocationDetail extends StatelessWidget {
@@ -99,14 +183,8 @@ class LocationDetail extends StatelessWidget {
         _overview(this.location),
         _descriptionArea(this.location),
         _staticMap(this.location),
-        Center(
-          child: RaisedButton(
-            onPressed: () {
-              _launchURL(location);
-            },
-            child: Text('Bring me to the location'),
-          ),
-        ),
+        _getInTouchArea(this.location),
+        _updateInfo()
       ],
     );
   }

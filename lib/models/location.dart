@@ -20,6 +20,8 @@ class Location {
   final String plz;
   final String street;
   final GeoPoint loc;
+  final String phone;
+  final String homepage;
 
   Location.fromSnapshot(DocumentSnapshot snapshot)
       : documentID = snapshot.documentID,
@@ -28,5 +30,7 @@ class Location {
         name = snapshot['name'],
         plz = snapshot['plz'],
         street = snapshot['street'],
-        loc = snapshot['loc'];
+        loc = snapshot['loc'],
+        homepage = snapshot['homepage'],
+        phone = snapshot['phone'];
 }
