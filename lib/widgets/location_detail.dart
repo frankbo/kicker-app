@@ -58,7 +58,16 @@ Widget _overview(Location location, double distanceAway) {
     padding: EdgeInsets.all(10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [Text(location.name), Text("$distanceInKm km")],
+      children: [
+        Text(
+          location.name,
+          style: TextStyle(color: KickerColors.textColorLight),
+        ),
+        Text(
+          "$distanceInKm km",
+          style: TextStyle(color: KickerColors.textColorLight),
+        )
+      ],
     ),
   );
 }
@@ -141,7 +150,7 @@ Widget _homepageArea(String homepage) => GestureDetector(
               padding: const EdgeInsets.only(right: 20),
               child: Icon(Icons.link),
             ),
-            Text("Schau dir die Webseite an."),
+            Text("Geh zur Homepage."),
           ],
         ),
       ),
