@@ -8,22 +8,18 @@ import 'package:url_launcher/url_launcher.dart';
 
 const googleMapsUrl = 'https://www.google.com/maps/';
 
-_launchMapsURL(Location location) async {
-  String googleUrl = googleMapsUrl +
-      'search/?api=1&query=${location.loc.latitude},${location.loc.longitude}';
-  if (await canLaunch(googleUrl)) {
-    await launch(googleUrl);
+_launch(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
   } else {
-    throw 'Could not launch $googleUrl';
+    throw 'Could not launch $url';
   }
 }
 
-_launchHomepageURL(String homepage) async {
-  if (await canLaunch(homepage)) {
-    await launch(homepage);
-  } else {
-    throw 'Could not launch $homepage';
-  }
+_launchMapsURL(Location location) {
+  String googleUrl = googleMapsUrl +
+      'search/?api=1&query=${location.loc.latitude},${location.loc.longitude}';
+  _launch(googleUrl);
 }
 
 Widget _heroIcon() {
@@ -97,16 +93,21 @@ Widget _staticMap(Location location) {
   );
 }
 
-Widget _phoneArea(String phone) => Container(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Icon(Icons.phone),
-          ),
-          Text(phone),
-        ],
+Widget _phoneArea(String phone) => GestureDetector(
+      onTap: () {
+        _launch("tel://$phone");
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Icon(Icons.phone),
+            ),
+            Text(phone),
+          ],
+        ),
       ),
     );
 
@@ -130,7 +131,7 @@ Widget _locationArea(Location location) => GestureDetector(
 
 Widget _homepageArea(String homepage) => GestureDetector(
       onTap: () {
-        _launchHomepageURL(homepage);
+        _launch(homepage);
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
