@@ -106,7 +106,9 @@ Widget _phoneArea(String phone) => GestureDetector(
       onTap: () {
         _launch("tel://$phone");
       },
-      child: Padding(
+      child: Container(
+        decoration:
+            BoxDecoration(border: Border.all(width: 4, color: Colors.grey)),
         padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
@@ -124,7 +126,9 @@ Widget _locationArea(Location location) => GestureDetector(
       onTap: () {
         _launchMapsURL(location);
       },
-      child: Padding(
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 4, color: KickerColors.lightGrey)),
         padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
@@ -142,7 +146,9 @@ Widget _homepageArea(String homepage) => GestureDetector(
       onTap: () {
         _launch(homepage);
       },
-      child: Padding(
+      child: Container(
+        decoration:
+            BoxDecoration(border: Border.all(width: 4, color: Colors.grey)),
         padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
@@ -174,13 +180,31 @@ Widget _getInTouchArea(Location location) {
 }
 
 Widget _updateInfo() {
-  return Center(
-      child: Row(
-    children: [
-      Icon(Icons.edit),
-      Text('Falsche Informationen?'),
-    ],
-  ));
+  return Container(
+    margin: const EdgeInsets.only(top: 20.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        OutlineButton(
+          onPressed: () {
+            _launch("mailto:support@not-available.com");
+          },
+          borderSide: BorderSide(width: 1.0, color: KickerColors.main),
+          child: Container(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 5.0),
+                  child: Icon(Icons.edit),
+                ),
+                Text('Falsche Informationen?'),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 class LocationDetail extends StatelessWidget {
