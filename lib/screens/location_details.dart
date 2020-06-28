@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kicker_app/models/location.dart';
-import 'package:kicker_app/widgets/location_detail.dart';
+import 'package:kicker_app/widgets/async_location_detail.dart';
 
 class LocationDetailsPage extends StatelessWidget {
   static final String route = "/location-details";
@@ -16,6 +16,6 @@ class LocationDetailsPage extends StatelessWidget {
           title: Center(child: Text("KickerApp")),
           centerTitle: true,
         ),
-        body: LocationDetail(this.arguments));
+        body: AsyncLocationDetail(this.arguments));
   }
 }

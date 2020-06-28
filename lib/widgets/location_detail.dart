@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kicker_app/lib/location_calculation.dart';
 import 'package:kicker_app/models/location.dart';
 import 'package:kicker_app/static/keys.dart';
 import 'package:kicker_app/static/kicker-colors.dart';
@@ -54,13 +55,14 @@ Widget _heroIcon() {
   ]);
 }
 
-Widget _overview(Location location) {
+Widget _overview(Location location, double distanceAway) {
+  final distanceInKm = roundDouble(meterToKilometers(distanceAway), 2);
   return Container(
     color: KickerColors.main,
     padding: EdgeInsets.all(10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [Text(location.name), Text("xxx km")],
+      children: [Text(location.name), Text("$distanceInKm km")],
     ),
   );
 }
@@ -173,14 +175,15 @@ Widget _updateInfo() {
 
 class LocationDetail extends StatelessWidget {
   final Location location;
-  LocationDetail(this.location);
+  final double distanceAway;
+  LocationDetail(this.location, this.distanceAway);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
         _heroIcon(),
-        _overview(this.location),
+        _overview(this.location, distanceAway),
         _descriptionArea(this.location),
         _staticMap(this.location),
         _getInTouchArea(this.location),
