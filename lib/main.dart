@@ -7,7 +7,7 @@ import 'package:kicker_app/screens/location_map.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
+  debugPaintSizeEnabled = false;
   runApp(App());
 }
 
