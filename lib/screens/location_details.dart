@@ -9,13 +9,11 @@ class LocationDetailsPage extends StatelessWidget {
   const LocationDetailsPage(this.arguments);
 
   @override
-  Widget build(BuildContext context) {
-    print(this.arguments);
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Center(child: Text("KickerApp")),
           centerTitle: true,
         ),
-        body: AsyncLocationDetail(this.arguments));
-  }
+        body: AsyncLocationDetail(this.arguments),
+      );
 }
